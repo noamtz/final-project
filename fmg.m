@@ -3,7 +3,7 @@ function v = fmg(A,A2h,Ihto2h,I2htoh,f,v,N)
 %   Detailed explanation goes here
 
 if(N <= 64)
-    v  = f*inv(A);
+     %[v , error] = weighted_jacobi(A,f,v,2/3,N,3);
 else
 
     r2h = f - v*A;
@@ -22,9 +22,9 @@ else
  
     
     v = vcycle(A, v, f, N);
-    v = vcycle(A, v, f, N);
-    v = vcycle(A, v, f, N);
-    v = vcycle(A, v, f, N);
+     v = vcycle(A, v, f, N);
+     v = vcycle(A, v, f, N);
+%     v = vcycle(A, v, f, N);
 end
 
 end   
