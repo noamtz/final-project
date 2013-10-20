@@ -1,0 +1,31 @@
+function v = relaxation(A,Ihto2h,f,v,N)
+
+global w max_it sizef sizeI
+
+
+if(N <= 64)
+    [v , error] = weighted_jacobi(A,f,v,w,N,max_it);
+else
+    size(v)
+    size(A)
+    size(v*A)
+    size(f)
+    r2h = f - v*A;
+    
+    size(r2h)
+    size(
+    f2h = r2h*Ihto2h;
+    
+    v2h = zeros(round((N/2)-1),1)';
+    
+    [A2h, I2htoh , Ihto2h] = restriction(A ,N);
+    
+    v2h = relaxation(A2h,Ihto2h,f2h,v2h,round(N/2));
+    
+    v = v + I2htoh*v2h;
+    
+end
+
+end
+
+

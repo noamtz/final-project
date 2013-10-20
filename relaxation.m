@@ -1,20 +1,29 @@
-function v = relaxation(A,f,method)
+function v = relaxation(A,A2h,Ihto2h,I2htoh,f,v,N)
+
+global w max_it sizef sizeI
 
 
+if(N <= 64)
+    
+    [v , error] = weighted_jacobi(A,f,v,w,N,max_it);
+else
+    r2h = f - v*A;
+    
+    f2h = r2h*Ihto2h;
+    
+    v2h = zeros(round((N/2)-1),1)';
 
-
-
-
-
-
-% switch method
-%    case 'jacoby'
-%       disp('execute jacoby');
-%    case 'weighted-jacoby'
-%        disp('weighted-jacoby');
-%    otherwise
-%       warning('Unknown relaxation method');
-% end
+    [A4h, I4htoh , Ihto4h] = restriction(A2h ,N/2);
+    %fprintf('Domain Down: %d\n' , N);
+    
+    v2h = relaxation(A2h, A4h,Ihto4h,I4htoh,f2h,v2h,N/2);
+    
+    % CORRECRION
+    %fprintf('Domain Up: %d\n' , N);
+    v = v + v2h*I2htoh;
+    
+end
 
 end
+
 
