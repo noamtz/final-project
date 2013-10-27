@@ -2,6 +2,13 @@ function v = fmg(A,A2h,Ihto2h,I2htoh,f,v,N)
 %FMG Summary of this function goes here
 %   Detailed explanation goes here
 
+% e = -v;
+% fprintf('FMG: e norm is: %d in Domain: %d\n' , norm(e,inf),N);
+% if(norm(e,inf) < 10^(-10))
+%     fprintf('vcycle Error Exited\n');
+%     return
+% end
+
 if(N <= 64)
      %[v , error] = weighted_jacobi(A,f,v,2/3,N,3);
 else
@@ -19,7 +26,7 @@ else
 
     % Set Initial guess
     v = v2h*I2htoh;
- 
+
     
     v = vcycle(A, v, f, N);
      v = vcycle(A, v, f, N);
