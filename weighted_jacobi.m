@@ -21,7 +21,7 @@ error = [];
 
 for j=1:maxi
     e = -v;
-    error = [error norm(e, inf)];
+    error =[error norm(e, inf)];
     v = v*Rw + w*(h^2)*f*Dinv;
 end
 
